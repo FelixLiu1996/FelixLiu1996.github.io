@@ -1,223 +1,37 @@
-<!DOCTYPE html>
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-  <title>机器学习—二分类常用指标 [ Felixliu的Blog呀 ]</title>
-  
-    <!-- stylesheets list from config.yml -->
-    
-      <link rel="stylesheet" href="/css/iLiKE.css">
-    
-  
-  
-  
-  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
-    <script id="leancloud">
-      AV.init({
-          appId: "6E5zTbTljdUbVW2WkXPsXGJk-gzGzoHsz",
-          appKey: "0vsyDKfNpeSECAI70J794ugv"
-      });
-    </script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
-<body>
-    <div class="header">
-        <div class="container">
-    <div class="menu">
-      <div class="menu-left">
-        <a href="/">
-          <img src="/favicon.ico"></img>
-        </a>
-      </div>
-      <div class="menu-right">
-        
-          
-          
-          
-          
-          
-          
-          <a href="/">Home</a>
-        
-          
-          
-          
-          
-          
-          
-          <a href="/archives">Archives</a>
-        
-          
-          
-          
-          
-          
-          
-          <a href="/about">About</a>
-        
-      </div>
-    </div>
-</div>
-    </div>
-    <div class="container">
-        <h1 class="post-title">机器学习—二分类常用指标</h1>
-<article class="post markdown-style">
-  <h1 id="一、常见的分类指标"><a href="#一、常见的分类指标" class="headerlink" title="一、常见的分类指标"></a>一、常见的分类指标</h1><h2 id="1-准确率-Accuracy"><a href="#1-准确率-Accuracy" class="headerlink" title="1. 准确率(Accuracy)"></a>1. 准确率(Accuracy)</h2><p>指的是<strong>分类正确的样本占总样本数的比例</strong>，</p>
-<script type="math/tex; mode=display">
-Accuracy = \frac{n_{correct}}{n_{total}}</script><p><strong>局限性</strong> 样本不均衡时，占比大的类别会影响准确率。</p>
-<h2 id="2-精确率与召回率"><a href="#2-精确率与召回率" class="headerlink" title="2. 精确率与召回率"></a>2. 精确率与召回率</h2><p>符号说明：<br>| 符号|含义 |<br>| :—-:|:—-: |<br>| TP | 模型判定为正的正样本|<br>| FP | 模型判定为正的负样本|<br>| TN| 模型判定为负的负样本|<br>| FN| 模型判定为负的正样本|</p>
-<h3 id="精确率-Precision"><a href="#精确率-Precision" class="headerlink" title="精确率(Precision)"></a>精确率(Precision)</h3><p>精确率(又称查准率)为模型判定正确的正样本占模型判定为正样本的比例。</p>
-<script type="math/tex; mode=display">Precision = \frac{TP}{TP+FP}</script><h3 id="召回率-Recall"><a href="#召回率-Recall" class="headerlink" title="召回率(Recall)"></a>召回率(Recall)</h3><p>召回率(又称查全率)为模型判定正确的正样本占所有正样本的比例。</p>
-<script type="math/tex; mode=display">Recall = \frac{TP}{TP+FN}</script><h3 id="二者的取舍"><a href="#二者的取舍" class="headerlink" title="二者的取舍"></a>二者的取舍</h3><p>精确率表示模型在更有把握的情况下才会将样本判定为正，有时会漏掉很多正样本，导致召回率降低。<br>二者需要根据实际场景进行取舍，如在推荐系统或广告检索中，粗排阶段需要尽可能的保证召回率，召回更多的样本，方便提供给之后的精排。</p>
-<h2 id="3-F1-Score"><a href="#3-F1-Score" class="headerlink" title="3. F1-Score"></a>3. F1-Score</h2>
-</article>
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-    <div class="pagenator post-pagenator">
-    
-    
+{% block page_class %}page-post-detail{% endblock %}
 
-    
-    <p>last update time 2021-05-08</p>
-    
-    
-        <a class="extend next post-next" href="/2021/05/08/hello-world/">next</a>
-    
-    </div>
 
+{% block content %}
+
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
-    <div class="footer">
-        <div class="container">
-    <div class="social">
-	<ul class="social-list">
-		
-			
-				
-				
-				<li>
-					<a href="mailto:felixliu1996@163.com" title="email" target="_blank">
-					<i class="fa fa-email"></i>
-					</a>
-				</li>
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-				
-				<li>
-					<a href="https://github.com/felixliu1996" title="github" target="_self">
-					<i class="fa fa-github"></i>
-					</a>
-				</li>
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-	</ul>
-</div>
-    <div class="copyright">
-        <span>
-            
-            
-            
-                © Felixliu 2017 - 2021
-            
-        </span>
-    </div>
-    <div class="power">
-        <span>
-            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/CaiChenghan/iLiKE">iLiKE Theme</a>
-        </span>
-    </div>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-    <!--page counter part-->
-<script>
-function addCount (Counter) {
-    url=$('.article-date').attr('href').trim();
-    title = $('.article-title').text().trim();
-    var query = new AV.Query(Counter);
-    //use url as unique idnetfication
-    query.equalTo("url",url);
-    query.find({
-        success: function(results) {
-            if (results.length>0) {
-                var counter=results[0];
-                counter.fetchWhenSave(true); //get recent result
-                counter.increment("time");
-                counter.save();
-            } else {
-                var newcounter=new Counter();
-                newcounter.set("title",title);
-                newcounter.set("url",url);
-                newcounter.set("time",1);
-                newcounter.save(null,{
-                    success: function(newcounter) {
-                        //alert('New object created');
-                    }, error: function(newcounter,error) {
-                        alert('Failed to create');
-                    }
-                })
-            }
-        },
-        error: function(error) {
-            //find null is not a error
-            alert('Error:'+error.code+" "+error.message);
-        }
-    });
-}
-$(function() {
-    var Counter=AV.Object.extend("Counter");
-    //only increse visit counting when intering a page
-    if ($('.article-title').length == 1) {
-       addCount(Counter);
-    }
-    var query=new AV.Query(Counter);
-    query.descending("time");
-    // the sum of popular posts
-    query.limit(10); 
-    query.find({
-        success: function(results) {
-                for(var i=0;i<results.length;i++) {
-                    var counter=results[i];
-                    title=counter.get("title");
-                    url=counter.get("url");
-                    time=counter.get("time");
-                    // add to the popularlist widget
-                    showcontent=title+" ("+time+")";
-                    //notice the "" in href
-                    $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                }
-            },
-        error: function(error) {
-            alert("Error:"+error.code+" "+error.message);
-        }
-    });
-});
-</script>
-</div>
-    </div>
-</body>
-</html>
+  </div>
+
+{% endblock %}
+
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
+
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
