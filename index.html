@@ -342,8 +342,11 @@ Accuracy = \frac{n_{correct}}{n_{total}}</script><p><strong>局限性</strong> �
 F1-Score = \frac{2\times precision \times recall}{precision + recall}</script><h2 id="4-ROC曲线与AUC值"><a href="#4-ROC曲线与AUC值" class="headerlink" title="4. ROC曲线与AUC值"></a>4. ROC曲线与AUC值</h2><h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><p>ROC曲线是(Receiver Operating Characteristic Curve)的简称。<br><strong>横轴</strong>是假阳性率(FPR), <strong>纵轴</strong>是真阳性率(TPR),计算公式为:</p>
 <script type="math/tex; mode=display">
 FPR=\frac{FP}{N}=\frac{FP}{FP+TN}</script><script type="math/tex; mode=display">
-TPR=\frac{TP}{P}=\frac{TP}{TP+FN}</script><p><strong>绘制ROC曲线</strong><br>由于判定是否是正类，是通过阈值来判断的，如设置阈值为0.9，则模型判定概率大于0.9的才是正类，其余为负类。<br>所以ROC曲线通过设置不同的阈值得到相应的正负样本——即得到横纵坐标点，绘制而成。<br>eg<br><img src="https://img-blog.csdnimg.cn/20210509003154262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgxOTg0MQ==,size_16,color_FFFFFF,t_70" alt=""></p>
-
+TPR=\frac{TP}{P}=\frac{TP}{TP+FN}</script><p><strong>绘制ROC曲线</strong><br>由于判定是否是正类，是通过阈值来判断的，如设置阈值为0.9，则模型判定概率大于0.9的才是正类，其余为负类。<br>所以ROC曲线通过设置不同的阈值得到相应的正负样本——即得到横纵坐标点，绘制而成。如下图所示 eg<br><img src="https://img-blog.csdnimg.cn/20210509003154262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzgxOTg0MQ==,size_16,color_FFFFFF,t_70" alt=""></p>
+<h3 id="AUC值"><a href="#AUC值" class="headerlink" title="AUC值"></a>AUC值</h3><p>AUC(Area under curve) ROC曲线下的面积，介于[0, 1]之间，但由于ROC曲线位于y=x的左上方(如果不是，则将预测的概率p反转成1-p即可)，所以取值为[0.5, 1]之间。值越大，表示ROC曲线越向左接近(0,1)点，表示模型分类效果越好——AUC值越大，说明模型越可能将真的正样本排在前面，模型效果越好。<br><strong>AUC值的意义</strong><br>AUC值的<strong>几何意义</strong>即为ROC曲线下的面积，所以直观的想法是对ROC曲线积分得到AUC值。</p>
+<p>但在一篇介绍AUC值的论文中，看到AUC值Wilcoxon-Mann-Witney Test是等价的——Wilcoxon-Mann-Witney Test是任意给一个正样本与负样本，正样本的score有多大的概率大于负样本的score，等价的可以理解为任给一个负样本，<strong>所有正样本</strong>的score有多大的比例大于该负样本的score，也即对所有负样本，有多少的正样本的score比它的大；将结果按照score的高低排序，阈值恰好等为该负样本score的真阳性率TPR。所以AUC值与任给一个正样本与负样本，正样本的score有多大的概率大于负样本的score等价。<br>所以AUC的计算可以这样写，M为正样本的个数，N为负样本的个数，统计所有正负样本对，有多少组正样本的score大于负样本的score。当正负样本score相等时，按照0.5计算，然后除以MN。公式为:</p>
+<script type="math/tex; mode=display">
+AUC=\frac{\Sigma_i^n(pos\_score > neg\_score) + 0.5\times \Sigma_i^n(pos\_score = neg\_score)}{M \times N}</script>
           
         
       
