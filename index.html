@@ -231,6 +231,130 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Felixliu的Blog呀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%8E%92%E5%BA%8F/" itemprop="url">\[数据结构\]排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-09T14:09:16+08:00">
+                2021-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>好久没看数据结构与算法的知识了，打算今天开始重新回顾一下数据结构与算法的知识，夯实一下本就不牢固的基础。</p>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><p>先来三种复杂度$O(n^2)$的排序算法。</p>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def bubble_sort(alist):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    冒泡排序: 每次比较相邻的两个数，然后交换</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if not alist:</span><br><span class="line">        return []</span><br><span class="line">    for passnum in range(len(alist) - 1, 0, -1):</span><br><span class="line">        for i in range(passnum):</span><br><span class="line">            if alist[i] &gt; alist[i + 1]:</span><br><span class="line">                alist[i], alist[i + 1] = alist[i + 1], alist[i]</span><br><span class="line">    </span><br><span class="line">    return alist</span><br></pre></td></tr></table></figure>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def select_sort(alist):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    选择排序: 每次遍历只将当前最大的值放置到正确的位置上</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if not alist:</span><br><span class="line">        return []</span><br><span class="line">    for passnum in range(len(alist) - 1, 0, -1):</span><br><span class="line">        max_nun = 0</span><br><span class="line">        for i in range(1, passnum + 1):</span><br><span class="line">            if alist[i] &gt; alist[max_nun]:</span><br><span class="line">                max_nun = i</span><br><span class="line">        alist[max_nun], alist[passnum] = alist[passnum], alist[max_nun]</span><br><span class="line"></span><br><span class="line">    return alist</span><br></pre></td></tr></table></figure>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def insert_sort(alist):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    插入排序: 每次维护一个较小的排序好的区间, 然后将已经待排序的进行插入</span><br><span class="line">    每次待待排序的和前面的进行比较，排序好的大于待排序的, 则排序好的往后移，直到不大于, 则是需要插入的位置</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if not alist:</span><br><span class="line">        return []</span><br><span class="line">    for index in range(1, len(alist)):</span><br><span class="line">        position = index</span><br><span class="line">        while position &gt; 0 and alist[position - 1] &gt; alist[position]:</span><br><span class="line">            alist[position], alist[position - 1] = alist[position - 1], alist[position]</span><br><span class="line">        position -= 1</span><br><span class="line">    return alist</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E4%BA%8C%E5%88%86%E7%B1%BB%E5%B8%B8%E7%94%A8%E6%8C%87%E6%A0%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -555,7 +679,7 @@ AUC=\frac{\Sigma_i^n(pos\_score > neg\_score) + 0.5\times \Sigma_i^n(pos\_score 
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
